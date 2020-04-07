@@ -1,4 +1,5 @@
 import 'package:fastcash/intro.dart';
+import 'package:fastcash/login.dart';
 import 'package:flutter/material.dart';
 
 main() => runApp(MyApp());
@@ -20,7 +21,8 @@ class _MyApp extends State<MyApp> {
       home: Scaffold(
         body: Container(
           child: Center(
-            child: IntroScreen(),
+            //child: IntroScreen(),
+            child: LoginScreen(),
           ),
         ),
       ),
