@@ -1,5 +1,6 @@
 import 'package:fastcash/intro.dart';
 import 'package:fastcash/login.dart';
+import 'package:fastcash/registerFirstPage.dart';
 import 'package:flutter/material.dart';
 
 main() => runApp(MyApp());
@@ -22,7 +23,8 @@ class _MyApp extends State<MyApp> {
         body: Container(
           child: Center(
             //child: IntroScreen(),
-            child: LoginScreen(),
+            //child: LoginScreen(),
+            child: RegisterFirstPage(),
           ),
         ),
       ),
