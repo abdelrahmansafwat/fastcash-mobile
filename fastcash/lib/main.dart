@@ -1,6 +1,8 @@
 import 'package:fastcash/intro.dart';
 import 'package:fastcash/login.dart';
+import 'package:fastcash/receivePayment.dart';
 import 'package:fastcash/registerFirstPage.dart';
+import 'package:fastcash/sendPayment.dart';
 import 'package:flutter/material.dart';
 
 main() => runApp(MyApp());
@@ -24,7 +26,8 @@ class _MyApp extends State<MyApp> {
           child: Center(
             //child: IntroScreen(),
             //child: LoginScreen(),
-            child: RegisterFirstPage(),
+            //child: RegisterFirstPage(),
+            child: ReceivePayment(),
           ),
         ),
       ),
