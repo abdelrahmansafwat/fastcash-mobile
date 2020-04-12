@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 const url =
-    'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/payment/send';
+    'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/payment/receive';
 
 class ReceivePayment extends StatefulWidget {
   @override
@@ -35,12 +35,15 @@ class _ReceivePayment extends State<ReceivePayment> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Text("Amount"),
-                  TextField(
-                    onChanged: (text) {
-                      setState(() {
-                        amount = text;
-                      });
-                    },
+                  Container(
+                    width: 100,
+                    child: TextField(
+                      onChanged: (text) {
+                        setState(() {
+                          amount = text;
+                        });
+                      },
+                    ),
                   ),
                   RaisedButton(
                     color: Color(0xffffffff),
@@ -52,8 +55,10 @@ class _ReceivePayment extends State<ReceivePayment> {
                       borderRadius: new BorderRadius.circular(18.0),
                     ),
                     onPressed: () async {
-                      var body = json.encode(
-                          {'amount': double.parse(amount), 'email': 'test@test.com'});
+                      var body = json.encode({
+                        'amount': double.parse(amount),
+                        'email': 'test@test.com'
+                      });
                       var response = await http.post(url, body: body, headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/x-www-form-urlencoded"

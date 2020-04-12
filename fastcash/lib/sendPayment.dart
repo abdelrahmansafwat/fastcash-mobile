@@ -4,8 +4,8 @@ import 'package:qr_code_scanner/qr_scanner_overlay_shape.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const url = 'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/payment/send';
-
+const url =
+    'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/payment/send';
 
 class SendPayment extends StatefulWidget {
   const SendPayment({
@@ -60,11 +60,12 @@ class _SendPaymentState extends State<SendPayment> {
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
+      controller.pauseCamera();
       var body = json.encode({'code': scanData, 'email': 'test2@test.com'});
       var response = await http.post(url, body: body, headers: {
-  "Accept": "application/json",
-  "Content-Type": "application/x-www-form-urlencoded"
-});
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      });
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
       setState(() {
