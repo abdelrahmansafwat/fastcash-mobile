@@ -55,10 +55,16 @@ class _ReceivePayment extends State<ReceivePayment> {
                       borderRadius: new BorderRadius.circular(18.0),
                     ),
                     onPressed: () async {
+                      var body = new Map<String, dynamic>();
+                      /*
                       var body = json.encode({
                         'amount': double.parse(amount),
                         'email': 'test@test.com'
                       });
+                      */
+                      body["email"] = "test@test.com";
+                      body["amount"] = amount;
+                      print(body.toString());
                       var response = await http.post(url, body: body, headers: {
                         "Accept": "application/json",
                         "Content-Type": "application/x-www-form-urlencoded"
