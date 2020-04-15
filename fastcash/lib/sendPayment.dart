@@ -61,7 +61,10 @@ class _SendPaymentState extends State<SendPayment> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) async {
       controller.pauseCamera();
-      var body = json.encode({'code': scanData, 'email': 'test2@test.com'});
+      //var body = json.encode({'code': scanData, 'email': 'test2@test.com'});
+      var body = new Map<String, dynamic>();
+      body["code"] = scanData;
+      body["email"] = "test2@test.com";
       var response = await http.post(url, body: body, headers: {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
