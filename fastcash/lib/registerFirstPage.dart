@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fastcash/login.dart';
 
+import 'login.dart';
+
 class RegisterFirstPage extends StatelessWidget {
   TextEditingController FirstName = TextEditingController();
   TextEditingController LastName = TextEditingController();
@@ -16,7 +18,7 @@ bool acceptTerm=false;
     return DecoratedBox(
       decoration: BoxDecoration(
       //image: DecorationImage(image: AssetImage("images/loginPage.png"), fit: BoxFit.cover),
-      color: Colors.blueGrey
+      color: Color.fromRGBO(30, 50, 250, 1),
     ),
             child: ListView(
               children: <Widget>[
@@ -28,7 +30,10 @@ bool acceptTerm=false;
                           style: TextStyle(fontSize: 20),
                         ),
                         onPressed: () {
-                         
+                        Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+            );
                         },
                       ),
           

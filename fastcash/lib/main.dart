@@ -26,8 +26,8 @@ class _MyApp extends State<MyApp> {
           child: Center(
             //child: IntroScreen(),
             //child: LoginScreen(),
-            //child: RegisterFirstPage(),
-            child: ReceivePayment(),
+            child: RegisterFirstPage(),
+            //child: ReceivePayment(),
           ),
         ),
       ),

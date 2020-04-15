@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "358562798089",
+    "firebase_url": "https://cash-test1.firebaseio.com",
+    "project_id": "cash-test1",
+    "storage_bucket": "cash-test1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358562798089:android:a2a8e4a7b9cfddc513f6d8",
+        "android_client_info": {
+          "package_name": "com.example.fastcash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358562798089-ete2e9ejpntq2dsb64ucsgm7esmj5638.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBaIrDiQMNO3JlmzdeLr2JMfNmLN-ufb4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358562798089-ete2e9ejpntq2dsb64ucsgm7esmj5638.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
