@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const url =
     'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/payment/receive';
@@ -14,6 +15,7 @@ class ReceivePayment extends StatefulWidget {
 class _ReceivePayment extends State<ReceivePayment> {
   var qrCode = "";
   var amount = "";
+  final storage = new FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class _ReceivePayment extends State<ReceivePayment> {
                         'email': 'test@test.com'
                       });
                       */
-                      body["email"] = "test@test.com";
+                      body["email"] = await storage.read(key: 'email');
                       body["amount"] = amount;
                       print(body.toString());
                       var response = await http.post(url, body: body, headers: {

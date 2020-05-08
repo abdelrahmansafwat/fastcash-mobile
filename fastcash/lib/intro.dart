@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:intro_slider/intro_slider.dart';
 import 'package:intro_slider/slide_object.dart';
 import 'package:intro_slider/dot_animation_enum.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:fastcash/registerFirstPage.dart';
 
 class IntroScreen extends StatefulWidget {
   IntroScreen({Key key}) : super(key: key);
@@ -15,6 +17,12 @@ class IntroScreenState extends State<IntroScreen> {
   Function goToTab;
 
   List<Slide> slides = new List();
+
+  final storage = new FlutterSecureStorage();
+
+  introViewed() async {
+    await storage.write(key: "intro", value: "viewed");
+  }
 
   @override
   void initState() {
@@ -102,10 +110,9 @@ class IntroScreenState extends State<IntroScreen> {
   changeStyle(bool boolValue) {
     print(boolValue);
     setState(() {
-      if(boolValue){
+      if (boolValue) {
         highlightTextColor = Color(0xffffffff);
-      }
-      else {
+      } else {
         highlightTextColor = Color(0xff1F32FA);
       }
     });
@@ -200,10 +207,17 @@ class IntroScreenState extends State<IntroScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(18.0),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      introViewed();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => RegisterFirstPage()),
+                      );
+                    },
                     child: Text(
                       "Get Started",
-                      style: TextStyle(fontSize: 20.0, color: highlightTextColor),
+                      style:
+                          TextStyle(fontSize: 20.0, color: highlightTextColor),
                     ),
                   ),
                 ),

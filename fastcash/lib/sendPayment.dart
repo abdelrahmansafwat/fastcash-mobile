@@ -3,6 +3,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:qr_code_scanner/qr_scanner_overlay_shape.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const url =
     'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/payment/send';
@@ -59,12 +60,14 @@ class _SendPaymentState extends State<SendPayment> {
 
   void _onQRViewCreated(QRViewController controller) {
     this.controller = controller;
+    final storage = new FlutterSecureStorage();
+    
     controller.scannedDataStream.listen((scanData) async {
       controller.pauseCamera();
       //var body = json.encode({'code': scanData, 'email': 'test2@test.com'});
       var body = new Map<String, dynamic>();
       body["code"] = scanData;
-      body["email"] = "test2@test.com";
+      body["email"] = await storage.read(key: 'email');
       var response = await http.post(url, body: body, headers: {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"

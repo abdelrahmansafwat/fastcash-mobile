@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "358562798089",
-    "firebase_url": "https://cash-test1.firebaseio.com",
-    "project_id": "cash-test1",
-    "storage_bucket": "cash-test1.appspot.com"
+    "project_number": "1088064790306",
+    "firebase_url": "https://fastcash-5a9e7.firebaseio.com",
+    "project_id": "fastcash-5a9e7",
+    "storage_bucket": "fastcash-5a9e7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:358562798089:android:a2a8e4a7b9cfddc513f6d8",
+        "mobilesdk_app_id": "1:1088064790306:android:f2deb80af8ee4dbdfacf7b",
         "android_client_info": {
           "package_name": "com.example.fastcash"
         }
       },
       "oauth_client": [
         {
-          "client_id": "358562798089-ete2e9ejpntq2dsb64ucsgm7esmj5638.apps.googleusercontent.com",
+          "client_id": "1088064790306-dtpp72sllp2go8fs35dhir3peg7srec8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBBaIrDiQMNO3JlmzdeLr2JMfNmLN-ufb4"
+          "current_key": "AIzaSyDilN9ZR7wtDtDMzdIIN_vZRxCVbOa8Ra8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "358562798089-ete2e9ejpntq2dsb64ucsgm7esmj5638.apps.googleusercontent.com",
+              "client_id": "1088064790306-dtpp72sllp2go8fs35dhir3peg7srec8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
