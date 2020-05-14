@@ -12,6 +12,12 @@ class LoginScreen extends StatelessWidget {
     //PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
   ]);
 
+  final emailValidator = MultiValidator([
+    RequiredValidator(errorText: 'email is required'),
+    EmailValidator(errorText: 'enter a valid email address'),
+    //PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
+  ]);
+
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   AuthenticationService auth = new AuthenticationService();
@@ -57,8 +63,7 @@ class LoginScreen extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
-                    validator: EmailValidator(
-                        errorText: 'enter a valid email address'),
+                    validator: emailValidator,
                     controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
