@@ -9,8 +9,6 @@ class RegisterFirstPage extends StatelessWidget {
   TextEditingController FirstName = TextEditingController();
   TextEditingController LastName = TextEditingController();
   TextEditingController Email = TextEditingController();
-  TextEditingController Country = TextEditingController();
-  TextEditingController Username = TextEditingController();
   TextEditingController Password = TextEditingController();
   TextEditingController ConfirmPassword = TextEditingController();
   bool acceptTerm = false;
