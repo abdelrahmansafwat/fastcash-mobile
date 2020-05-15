@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fastcash/login.dart';
 import 'package:fastcash/auth.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'login.dart';
 import 'package:fastcash/home.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -39,8 +40,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
   ]);
 
   final url =
-    'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/register';
-  
+      'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/register';
 
   authenticate() async {
     var result =
@@ -61,7 +61,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
 
-      if(response.statusCode == 200){
+      if (response.statusCode == 200) {
         return true;
       }
     }
@@ -71,15 +71,17 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
   @override
   Widget build(BuildContext context) {
     AlertDialog alert = AlertDialog(
-    title: Text("Terms & Conditions Error"),
-    content: Text("You must accept Terms & Conditions to register."),
-    actions: [
-      FlatButton(
-        child: Text("OK"),
-        onPressed: () {Navigator.of(context).pop();},
-      )
-    ],
-  );
+      title: Text("Terms & Conditions Error"),
+      content: Text("You must accept Terms & Conditions to register."),
+      actions: [
+        FlatButton(
+          child: Text("OK"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )
+      ],
+    );
 
     return MaterialApp(
       home: Scaffold(
@@ -123,6 +125,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                     validator:
                         RequiredValidator(errorText: 'first name is required'),
                     controller: FirstName,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'First Name',
@@ -137,6 +140,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                     validator:
                         RequiredValidator(errorText: 'first name is required'),
                     controller: LastName,
+                    style: TextStyle(color: Colors.white),
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Last Name',
@@ -148,6 +152,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
                     validator: emailValidator,
+                    style: TextStyle(color: Colors.white),
                     controller: Email,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -160,6 +165,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                   padding: EdgeInsets.all(10),
                   child: TextFormField(
                     validator: passwordValidator,
+                    style: TextStyle(color: Colors.white),
                     obscureText: true,
                     controller: Password,
                     decoration: InputDecoration(
@@ -176,6 +182,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                         MatchValidator(errorText: 'passwords do not match')
                             .validateMatch(val, Password.text),
                     controller: ConfirmPassword,
+                    style: TextStyle(color: Colors.white),
                     obscureText: true,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -200,11 +207,33 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                     FlatButton(
                       textColor: Colors.blue,
                       child: Text(
-                        'Term & Condition',
+                        'Terms & Conditions',
                         style: TextStyle(fontSize: 12),
                       ),
                       onPressed: () {
-                        //signup screen
+                        Alert(
+                          context: context,
+                          type: AlertType.info,
+                          title: "TERMS & CONDITIONS",
+                          desc:
+                              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "OK",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                setState(() {
+                                  acceptTerm = !acceptTerm;
+                                });
+                              },
+                              color: Color.fromRGBO(50, 205, 50, 1),
+                            ),
+                          ],
+                        ).show();
                       },
                     ),
                   ],
@@ -245,6 +274,5 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
         ),
       ),
     );
-    
   }
 }

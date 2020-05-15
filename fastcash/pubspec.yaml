@@ -31,6 +31,7 @@ dependencies:
   qr_flutter: ^3.2.0
   flutter_secure_storage: ^3.3.3
   form_field_validator: ^1.0.1
+  rflutter_alert: ^1.0.3
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

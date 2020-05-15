@@ -29,8 +29,11 @@ class LoginScreen extends StatelessWidget {
     var result = await auth.loginWithEmail(
         email: nameController.text, password: passwordController.text);
     if (result) {
+      print("Saving credintials in storage...");
       await storage.write(key: "email", value: nameController.text);
       await storage.write(key: "password", value: passwordController.text);
+      var email = await storage.readAll();
+      print(email);
       return true;
     }
     return false;
