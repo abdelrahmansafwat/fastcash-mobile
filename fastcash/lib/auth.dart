@@ -11,7 +11,7 @@ class AuthenticationService {
     try {
       var user = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-      return user != null;
+      return user;
     } catch (e) {
       return e.message;
     }
@@ -24,7 +24,7 @@ class AuthenticationService {
     try {
       var authResult = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      return authResult.user != null;
+      return authResult.user;
     } catch (e) {
       return e.message;
     }

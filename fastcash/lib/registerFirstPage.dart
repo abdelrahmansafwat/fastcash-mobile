@@ -19,6 +19,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
   TextEditingController FirstName = TextEditingController();
   TextEditingController LastName = TextEditingController();
   TextEditingController Email = TextEditingController();
+  TextEditingController Phone = TextEditingController();
   TextEditingController Password = TextEditingController();
   TextEditingController ConfirmPassword = TextEditingController();
   bool acceptTerm = false;
@@ -37,6 +38,12 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
     RequiredValidator(errorText: 'email is required'),
     EmailValidator(errorText: 'enter a valid email address'),
     //PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
+  ]);
+
+  final phoneValidator = MultiValidator([
+    RequiredValidator(errorText: 'phone number is required'),
+    //MinLengthValidator(6, errorText: 'password must be at least 6 digits long'),
+    PatternValidator(r'\b0((11)|(10)|(12)|(15))(\d){7}\w\b', errorText: 'enter a valid phone number')
   ]);
 
   final url =
@@ -98,7 +105,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                   padding: EdgeInsets.fromLTRB(0, 10, 260, 0),
                   textColor: Colors.white,
                   child: Text(
-                    '< Back',
+                    '< BACK',
                     style: TextStyle(fontSize: 20),
                   ),
                   onPressed: () {
@@ -157,6 +164,19 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Email',
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: TextFormField(
+                    validator: phoneValidator,
+                    style: TextStyle(color: Colors.white),
+                    controller: Phone,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Phone',
                       labelStyle: TextStyle(color: Colors.white),
                     ),
                   ),

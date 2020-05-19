@@ -2,6 +2,7 @@ import 'package:fastcash/login.dart';
 import 'package:flutter/material.dart';
 import 'package:fastcash/sendPayment.dart';
 import 'package:fastcash/receivePayment.dart';
+import 'package:fastcash/profile.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Home extends StatelessWidget {
@@ -21,10 +22,10 @@ class Home extends StatelessWidget {
             color: Colors.blue,
             child: Text('Log Out'),
             onPressed: () async {
-              await storage.deleteAll();
+              //await storage.deleteAll();
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
+                MaterialPageRoute(builder: (context) => ProfilePage()),
               );
             },
           ),

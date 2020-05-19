@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:fastcash/auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fastcash/home.dart';
 import 'package:fastcash/registerFirstPage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatelessWidget {
   final passwordValidator = MultiValidator([
@@ -11,6 +14,8 @@ class LoginScreen extends StatelessWidget {
     MinLengthValidator(6, errorText: 'password must be at least 6 digits long'),
     //PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
   ]);
+
+  //0((11)|(10)|(12)|(15))\d{8}
 
   final emailValidator = MultiValidator([
     RequiredValidator(errorText: 'email is required'),
@@ -23,17 +28,37 @@ class LoginScreen extends StatelessWidget {
   AuthenticationService auth = new AuthenticationService();
   final storage = new FlutterSecureStorage();
 
+  final url =
+      'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/information';
+
   final _formKey = GlobalKey<FormState>();
+
+  getInformation() async {
+    var body = new Map<String, dynamic>();
+    body["email"] = await storage.read(key: 'email');
+    var response = await http.post(url, body: body, headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded"
+    });
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    var user = jsonDecode(response.body)["data"];
+    print(user);
+    await storage.write(key: "firstName", value: user["firstName"]);
+    await storage.write(key: "lastName", value: user["lastName"]);
+    await storage.write(key: "phone", value: user["phone"]);
+  }
 
   authenticate() async {
     var result = await auth.loginWithEmail(
         email: nameController.text, password: passwordController.text);
-    if (result) {
+    if (result != null) {
       print("Saving credintials in storage...");
       await storage.write(key: "email", value: nameController.text);
       await storage.write(key: "password", value: passwordController.text);
-      var email = await storage.readAll();
-      print(email);
+      //var email = await storage.readAll();
+      //print(email);
+      await getInformation();
       return true;
     }
     return false;
@@ -99,14 +124,13 @@ class LoginScreen extends StatelessWidget {
                         if (_formKey.currentState.validate()) {
                           // If the form is valid, display a Snackbar.
                           var result = await authenticate();
-                        if (result) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Home()),
-                          );
+                          if (result) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Home()),
+                            );
+                          }
                         }
-                        }
-                        
                       },
                     )),
                 FlatButton(
