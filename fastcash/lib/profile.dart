@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'home.dart';
+
 class ProfilePage extends StatefulWidget {
   @override
   MapScreenState createState() => MapScreenState();
@@ -99,27 +101,20 @@ class MapScreenState extends State<ProfilePage>
                   color: Colors.white,
                   child: new Column(
                     children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(left: 20.0, top: 20.0),
-                          child: new Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              new Icon(
-                                Icons.arrow_back_ios,
-                                color: Colors.black,
-                                size: 22.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(left: 25.0),
-                                child: new Text('PROFILE',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20.0,
-                                        fontFamily: 'sans-serif-light',
-                                        color: Colors.black)),
-                              )
-                            ],
-                          )),
+                      FlatButton(
+                  padding: EdgeInsets.fromLTRB(0, 10, 250, 0),
+                  textColor: Colors.black,
+                  child: Text(
+                    '< BACK',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Home()),
+                    );
+                  },
+                ),
                     ],
                   ),
                 ),
