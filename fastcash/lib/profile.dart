@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import 'home.dart';
 
@@ -18,7 +19,7 @@ class MapScreenState extends State<ProfilePage>
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
   final url =
-      'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/information';
+      'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/update';
   var information = new Map<String, dynamic>();
   final storage = new FlutterSecureStorage();
 
@@ -73,7 +74,30 @@ class MapScreenState extends State<ProfilePage>
           print("Password can't be changed " + error.toString());
         });
       }
+      else {
+        return false;
+      }
     }
+
+    var body = new Map<String, dynamic>();
+      body["firstname"] = FirstName.text;
+      body["lastname"] = LastName.text;
+      body["email"] = Email.text;
+      body["phone"] = Phone.text;
+      var response = await http.post(url, body: body, headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded"
+      });
+
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
+      if (response.statusCode == 200) {
+        return true;
+      }
+      else {
+        return false;
+      }
   }
 
   @override
@@ -360,16 +384,60 @@ class MapScreenState extends State<ProfilePage>
                 child: new Text("Save"),
                 textColor: Colors.white,
                 color: Colors.green,
-                onPressed: () {
+                onPressed: () async {
                   setState(() {
                     _status = true;
-                    if (_formKey.currentState.validate()) {
-                      // If the form is valid, display a Snackbar.
-                      updateUser();
-                    }
-
                     FocusScope.of(context).requestFocus(new FocusNode());
                   });
+                  if (_formKey.currentState.validate()) {
+                      // If the form is valid, display a Snackbar.
+                      var update = await updateUser();
+
+                      if(update){
+                        Alert(
+                          context: context,
+                          type: AlertType.success,
+                          title: "SUCCESS",
+                          desc:
+                              "User information updated successfully.",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "OK",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              color: Color.fromRGBO(50, 205, 50, 1),
+                            ),
+                          ],
+                        ).show();
+                      }
+                      else {
+                        Alert(
+                          context: context,
+                          type: AlertType.error,
+                          title: "ERROR",
+                          desc:
+                              "An error occured. Please try again later.",
+                          buttons: [
+                            DialogButton(
+                              child: Text(
+                                "OK",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              color: Color.fromRGBO(50, 205, 50, 1),
+                            ),
+                          ],
+                        ).show();
+                      }
+                  }
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0)),

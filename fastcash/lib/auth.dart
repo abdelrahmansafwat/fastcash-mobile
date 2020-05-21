@@ -13,6 +13,7 @@ class AuthenticationService {
           email: email, password: password);
       return user;
     } catch (e) {
+      print("Wrong email/password.");
       return e.message;
     }
   }

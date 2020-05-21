@@ -1,3 +1,4 @@
+import 'package:fastcash/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:fastcash/login.dart';
 import 'package:fastcash/auth.dart';
@@ -27,6 +28,9 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
   final storage = new FlutterSecureStorage();
 
   final _formKey = GlobalKey<FormState>();
+
+  final PushNotificationService _pushNotificationService =
+      PushNotificationService();
 
   final passwordValidator = MultiValidator([
     RequiredValidator(errorText: 'password is required'),
@@ -73,6 +77,23 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
       }
     }
     return false;
+  }
+
+  getToken() async {
+    print("Getting token...");
+    await _pushNotificationService.initialise();
+    var token = await _pushNotificationService.getToken();
+    print(token);
+    var body = new Map<String, dynamic>();
+    body["token"] = token;
+    body["email"] = await storage.read(key: 'email');
+    var response = await http.post(url, body: body, headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded"
+    });
+
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
   }
 
   @override
@@ -272,6 +293,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                             // If the form is valid, display a Snackbar.
                             var result = await authenticate();
                             if (result) {
+                              await getToken();
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Home()),

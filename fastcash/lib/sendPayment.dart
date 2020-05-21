@@ -62,6 +62,7 @@ class _SendPaymentState extends State<SendPayment> {
       var body = new Map<String, dynamic>();
       body["code"] = scanData;
       body["email"] = await storage.read(key: 'email');
+      print(body);
       var checkResponse = await http.post(checkUrl, body: body, headers: {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
@@ -75,7 +76,7 @@ class _SendPaymentState extends State<SendPayment> {
           type: AlertType.warning,
           title: "CONFIRM",
           desc:
-              "Are you sure you want to pay ${data["amount"]}EGP to ${data["paymentFor"]}?",
+              "Are you sure you want to pay ${data["amount"]}EGP to ${data["firstName"]} ${data["lastName"]}?",
           buttons: [
             DialogButton(
               child: Text(
