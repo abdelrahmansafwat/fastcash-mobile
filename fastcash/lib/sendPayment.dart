@@ -85,6 +85,9 @@ class _SendPaymentState extends State<SendPayment> {
               ),
               onPressed: () async {
                 Navigator.pop(context);
+                var firstName = await storage.read(key: 'firstName');
+                var lastName = await storage.read(key: 'lastName');
+                body["name"] = firstName + " " + lastName;
                 var sendResponse =
                     await http.post(sendUrl, body: body, headers: {
                   "Accept": "application/json",
