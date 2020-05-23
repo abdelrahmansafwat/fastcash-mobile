@@ -32,6 +32,7 @@ class _MyApp extends State<MyApp> {
     // TODO: implement build
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Container(
           child: Center(
             //child: IntroScreen(),

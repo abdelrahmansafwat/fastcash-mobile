@@ -21,6 +21,7 @@ class _ReceivePayment extends State<ReceivePayment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
             children: <Widget>[

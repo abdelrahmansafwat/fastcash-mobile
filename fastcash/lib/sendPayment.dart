@@ -31,6 +31,7 @@ class _SendPaymentState extends State<SendPayment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: <Widget>[
           Expanded(
@@ -70,7 +71,7 @@ class _SendPaymentState extends State<SendPayment> {
       print('Check response status: ${checkResponse.statusCode}');
       print('Check response body: ${checkResponse.body}');
       var data = jsonDecode(checkResponse.body)["data"];
-      if (checkResponse.statusCode == 200) {
+      if (checkResponse.statusCode == 200  && data != null) {
         Alert(
           context: context,
           type: AlertType.warning,
@@ -95,9 +96,9 @@ class _SendPaymentState extends State<SendPayment> {
                 });
                 print('Send response status: ${sendResponse.statusCode}');
                 print('Send response body: ${sendResponse.body}');
-                var responseBody = jsonDecode(sendResponse.body)["data"];
-                print("Test body" + responseBody);
-                if (sendResponse.statusCode == 200 && responseBody != null) {
+                //var responseBody = jsonDecode(sendResponse.body)["data"];
+                //print("Test body" + responseBody);
+                if (sendResponse.statusCode == 200) {
                   Alert(
                     context: context,
                     type: AlertType.success,
@@ -120,7 +121,8 @@ class _SendPaymentState extends State<SendPayment> {
                       ),
                     ],
                   ).show();
-                } else {
+                } 
+                else {
                   Alert(
                     context: context,
                     type: AlertType.error,
@@ -157,7 +159,29 @@ class _SendPaymentState extends State<SendPayment> {
             )
           ],
         ).show();
-      } else {
+      }
+      else if(data == null){
+        Alert(
+          context: context,
+          type: AlertType.error,
+          title: "ERROR",
+          desc: "Invalid code.",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "OK",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+                controller.resumeCamera();
+              },
+              color: Color.fromRGBO(50, 205, 50, 1),
+            ),
+          ],
+        ).show();
+      }
+       else {
         Alert(
           context: context,
           type: AlertType.error,

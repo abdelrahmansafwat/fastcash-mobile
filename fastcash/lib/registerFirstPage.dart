@@ -118,6 +118,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
 
     return MaterialApp(
       home: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Form(
           key: _formKey,
           child: DecoratedBox(
@@ -291,7 +292,11 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
                     child: RaisedButton(
                       textColor: Colors.white,
                       color: Colors.blue,
-                      child: Text('Next'),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18.0),
+                          //side: BorderSide(color: Colors.red)
+                        ),
+                      child: Text('Register'),
                       onPressed: () async {
                         if (acceptTerm) {
                           if (_formKey.currentState.validate()) {
