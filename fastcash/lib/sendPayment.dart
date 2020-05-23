@@ -96,6 +96,7 @@ class _SendPaymentState extends State<SendPayment> {
                 print('Send response status: ${sendResponse.statusCode}');
                 print('Send response body: ${sendResponse.body}');
                 var responseBody = jsonDecode(sendResponse.body)["data"];
+                print("Test body" + responseBody)
                 if (sendResponse.statusCode == 200 && responseBody != null) {
                   Alert(
                     context: context,
