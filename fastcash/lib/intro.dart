@@ -1,3 +1,4 @@
+import 'package:fastcash/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intro_slider/intro_slider.dart';
@@ -211,7 +212,8 @@ class IntroScreenState extends State<IntroScreen> {
                       introViewed();
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterFirstPage()),
+                        MaterialPageRoute(
+                            builder: (context) => RegisterFirstPage()),
                       );
                     },
                     child: Text(
@@ -222,12 +224,27 @@ class IntroScreenState extends State<IntroScreen> {
                   ),
                 ),
                 Container(
-                  child: Text(
-                    "Already have an account? Sign in",
-                    style: TextStyle(fontSize: 15.0, color: Color(0xffffffff)),
-                    textAlign: TextAlign.center,
+                  child: Row(
+                    children: <Widget>[
+                      Text('Already have an account?',
+                          style: TextStyle(color: Colors.white70)),
+                      FlatButton(
+                        textColor: Colors.blue,
+                        child: Text(
+                          'Login',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginScreen()),
+                          );
+                        },
+                      )
+                    ],
+                    mainAxisAlignment: MainAxisAlignment.center,
                   ),
-                  margin: EdgeInsets.only(top: 15.0),
                 ),
               ],
             ),

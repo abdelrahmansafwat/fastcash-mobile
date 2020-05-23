@@ -36,6 +36,10 @@ class LoginScreen extends StatelessWidget {
   final url =
       'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/information';
 
+  final tokenUrl =
+      'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/notifications';
+
+
   final _formKey = GlobalKey<FormState>();
 
   final PushNotificationService _pushNotificationService =
@@ -82,7 +86,7 @@ class LoginScreen extends StatelessWidget {
     var body = new Map<String, dynamic>();
     body["token"] = token;
     body["email"] = await storage.read(key: 'email');
-    var response = await http.post(url, body: body, headers: {
+    var response = await http.post(tokenUrl, body: body, headers: {
       "Accept": "application/json",
       "Content-Type": "application/x-www-form-urlencoded"
     });

@@ -52,6 +52,10 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
 
   final url =
       'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/register';
+  
+  final tokenUrl =
+      'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/notifications';
+
 
   authenticate() async {
     var result =
@@ -87,7 +91,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
     var body = new Map<String, dynamic>();
     body["token"] = token;
     body["email"] = await storage.read(key: 'email');
-    var response = await http.post(url, body: body, headers: {
+    var response = await http.post(tokenUrl, body: body, headers: {
       "Accept": "application/json",
       "Content-Type": "application/x-www-form-urlencoded"
     });
