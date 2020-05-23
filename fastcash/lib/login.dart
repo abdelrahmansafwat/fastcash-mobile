@@ -58,6 +58,8 @@ class LoginScreen extends StatelessWidget {
     await storage.write(key: "firstName", value: user["firstName"]);
     await storage.write(key: "lastName", value: user["lastName"]);
     await storage.write(key: "phone", value: user["phone"]);
+    var storedUser = await storage.readAll();
+    print(storedUser);
   }
 
   authenticate() async {

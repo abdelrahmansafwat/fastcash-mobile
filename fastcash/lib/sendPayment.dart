@@ -76,7 +76,7 @@ class _SendPaymentState extends State<SendPayment> {
           type: AlertType.warning,
           title: "CONFIRM",
           desc:
-              "Are you sure you want to pay ${data["amount"]}EGP to ${data["firstName"]} ${data["lastName"]}?",
+              "Are you sure you want to pay ${data["amount"]}EGP to ${data["paymentForName"]}?",
           buttons: [
             DialogButton(
               child: Text(

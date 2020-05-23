@@ -68,6 +68,7 @@ class _RegisterFirstPage extends State<RegisterFirstPage> {
       body["firstname"] = FirstName.text;
       body["lastname"] = LastName.text;
       body["email"] = Email.text;
+      body["phone"] = Phone.text;
       var response = await http.post(url, body: body, headers: {
         "Accept": "application/json",
         "Content-Type": "application/x-www-form-urlencoded"
