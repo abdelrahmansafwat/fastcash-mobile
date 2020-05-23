@@ -95,9 +95,12 @@ class _ReceivePayment extends State<ReceivePayment> {
                   */
                   //var email = await storage.read(key: 'email');
                   //print(email);
+                  var firstName = await storage.read(key: 'firstName');
+                  var lastName = await storage.read(key: 'lastName');
                   body["email"] = await storage.read(key: 'email');
                   body["amount"] = amount;
                   body["description"] = description;
+                  body["paymentForName"] = firstName + " " + lastName;
                   print(body.toString());
                   var response =
                       await http.post(url, body: body, headers: {

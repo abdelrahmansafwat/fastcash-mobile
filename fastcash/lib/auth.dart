@@ -14,7 +14,7 @@ class AuthenticationService {
       return user;
     } catch (e) {
       print("Wrong email/password.");
-      return e.message;
+      return null;
     }
   }
 

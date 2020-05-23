@@ -39,7 +39,6 @@ class LoginScreen extends StatelessWidget {
   final tokenUrl =
       'https://cvgynkhgj8.execute-api.eu-central-1.amazonaws.com/dev/api/user/notifications';
 
-
   final _formKey = GlobalKey<FormState>();
 
   final PushNotificationService _pushNotificationService =
@@ -64,7 +63,7 @@ class LoginScreen extends StatelessWidget {
   authenticate() async {
     var result = await auth.loginWithEmail(
         email: nameController.text, password: passwordController.text);
-    
+
     //print("Firebase result: " + result.toString());
     if (result != null) {
       print("Saving credintials in storage...");
@@ -93,6 +92,8 @@ class LoginScreen extends StatelessWidget {
 
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
+
+    return true;
   }
 
   @override
@@ -156,32 +157,33 @@ class LoginScreen extends StatelessWidget {
                           // If the form is valid, display a Snackbar.
                           var result = await authenticate();
                           if (result) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Home()),
-                            );
-                          }
-                          else {
+                            var token = await getToken();
+                            if (token) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                              );
+                            }
+                          } else {
                             Alert(
-                          context: context,
-                          type: AlertType.error,
-                          title: "ERROR",
-                          desc:
-                              "Wrong email/password.",
-                          buttons: [
-                            DialogButton(
-                              child: Text(
-                                "OK",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              color: Color.fromRGBO(50, 205, 50, 1),
-                            ),
-                          ],
-                        ).show();
+                              context: context,
+                              type: AlertType.error,
+                              title: "ERROR",
+                              desc: "Wrong email/password.",
+                              buttons: [
+                                DialogButton(
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  color: Color.fromRGBO(50, 205, 50, 1),
+                                ),
+                              ],
+                            ).show();
                           }
                         }
                       },
@@ -208,7 +210,6 @@ class LoginScreen extends StatelessWidget {
                         style: TextStyle(fontSize: 20),
                       ),
                       onPressed: () async {
-                        await getToken();
                         Navigator.push(
                           context,
                           MaterialPageRoute(
