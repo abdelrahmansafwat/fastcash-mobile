@@ -127,7 +127,7 @@ class MapScreenState extends State<ProfilePage>
                   child: new Column(
                     children: <Widget>[
                       FlatButton(
-                  padding: EdgeInsets.fromLTRB(0, 10, 250, 0),
+                  padding: EdgeInsets.fromLTRB(0, 10, 300, 0),
                   textColor: Colors.black,
                   child: Text(
                     '< BACK',

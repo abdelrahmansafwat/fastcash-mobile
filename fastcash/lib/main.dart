@@ -59,11 +59,17 @@ class _MyApp extends State<MyApp> {
                             return LoginScreen();
                           }
                         }
+                        else {
+                          return CircularProgressIndicator();
+                        }
                       },
                     );
                   } else {
                     return IntroScreen();
                   }
+                }
+                else {
+                  return CircularProgressIndicator();
                 }
               },
             ),

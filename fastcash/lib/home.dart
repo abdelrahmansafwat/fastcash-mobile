@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:fastcash/history.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:fastcash/locator.dart';
 import 'package:fastcash/login.dart';
@@ -85,6 +86,7 @@ class _Home extends State<Home> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onTap: () async {
+                    await getInformation();
                     showBarModalBottomSheet(
                       expand: false,
                       context: context,
@@ -128,7 +130,12 @@ class _Home extends State<Home> {
               ),
               ListTile(
                 title: Text("Transactions History"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => History()),
+                  );
+                },
               ),
               ListTile(
                 title: Text("Log Out"),
