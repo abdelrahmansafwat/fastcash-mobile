@@ -21,6 +21,27 @@ class _History extends State<History> {
   var userEmail = " ";
   var wallet = "";
 
+  convertTime(time){
+    var day = DateTime.parse(time).day;
+    var month = DateTime.parse(time).month;
+    var year = DateTime.parse(time).year;
+    var hour = DateTime.parse(time).hour;
+    var minute = DateTime.parse(time).minute;
+    var ampm = hour >= 12 ? "PM" : "AM";
+
+    if(hour > 12){
+      hour -= 12;
+    }
+
+    if(hour == 0){
+      hour = 12;
+    }
+
+    var converted = "$day/$month/$year $hour:$minute $ampm";
+
+    return converted;
+  }
+
   getHistory() async {
     var email = await storage.read(key: 'email');
 
@@ -69,7 +90,7 @@ class _History extends State<History> {
                       children: <Widget>[
                         Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 20)),
                         Text(
-                            "Date: ${DateTime.parse(allData[1][index]["date"]).day}/${DateTime.parse(allData[1][index]["date"]).month}/${DateTime.parse(allData[1][index]["date"]).year} ${DateTime.parse(allData[1][index]["date"]).hour.toInt() > 12 ? (DateTime.parse(allData[1][index]["date"]).hour - 12).toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " PM" : DateTime.parse(allData[1][index]["date"]).hour == 12 ? DateTime.parse(allData[1][index]["date"]).hour.toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " PM" : DateTime.parse(allData[1][index]["date"]).hour.toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " AM"}"),
+                            "Date: ${convertTime(allData[1][index]["date"])}"),
                       ],
                     ),
                   ],
