@@ -45,10 +45,10 @@ class _History extends State<History> {
     List cards = new List.generate(
         allData[1].length,
         (index) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: new Card(
-            elevation: 30,
-            //color: Color.fromRGBO(30, 50, 250, 1),
+              padding: const EdgeInsets.all(8.0),
+              child: new Card(
+                elevation: 30,
+                //color: Color.fromRGBO(30, 50, 250, 1),
                 child: Column(
                   children: <Widget>[
                     new Row(
@@ -61,19 +61,21 @@ class _History extends State<History> {
                     new Row(
                       children: <Widget>[
                         Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 20)),
-                        Text("Description: ${allData[1][index]["description"]}"),
+                        Text(
+                            "Description: ${allData[1][index]["description"]}"),
                       ],
                     ),
                     new Row(
                       children: <Widget>[
                         Padding(padding: EdgeInsets.fromLTRB(10, 20, 10, 20)),
-                        Text("Date: ${DateTime.parse(allData[1][index]["date"]).day}/${DateTime.parse(allData[1][index]["date"]).month}/${DateTime.parse(allData[1][index]["date"]).year} ${DateTime.parse(allData[1][index]["date"]).hour.toInt() > 12 ? (DateTime.parse(allData[1][index]["date"]).hour == 12 ? DateTime.parse(allData[1][index]["date"]).hour.toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " PM" : (DateTime.parse(allData[1][index]["date"]).hour-12).toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " PM" : DateTime.parse(allData[1][index]["date"]).hour.toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " AM") : "" }"),
+                        Text(
+                            "Date: ${DateTime.parse(allData[1][index]["date"]).day}/${DateTime.parse(allData[1][index]["date"]).month}/${DateTime.parse(allData[1][index]["date"]).year} ${DateTime.parse(allData[1][index]["date"]).hour.toInt() > 12 ? (DateTime.parse(allData[1][index]["date"]).hour - 12).toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " PM" : DateTime.parse(allData[1][index]["date"]).hour == 12 ? DateTime.parse(allData[1][index]["date"]).hour.toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " PM" : DateTime.parse(allData[1][index]["date"]).hour.toString() + ":" + DateTime.parse(allData[1][index]["date"]).minute.toString() + " AM"}"),
                       ],
                     ),
                   ],
                 ),
               ),
-        )).toList();
+            )).toList();
 
     return cards;
   }
@@ -87,19 +89,19 @@ class _History extends State<History> {
         body: Column(
           children: <Widget>[
             FlatButton(
-                  padding: EdgeInsets.fromLTRB(0, 10, 300, 0),
-                  textColor: Colors.black,
-                  child: Text(
-                    '< BACK',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Home()),
-                    );
-                  },
-                ),
+              padding: EdgeInsets.fromLTRB(0, 10, 300, 0),
+              textColor: Colors.black,
+              child: Text(
+                '< BACK',
+                style: TextStyle(fontSize: 20),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                );
+              },
+            ),
             FutureBuilder(
               future: getHistory(),
               builder: (context, snapshot) {
