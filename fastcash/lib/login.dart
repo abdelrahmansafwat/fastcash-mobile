@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:fastcash/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:fastcash/auth.dart';
@@ -9,7 +8,6 @@ import 'package:fastcash/registerFirstPage.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
-
 import 'locator.dart';
 
 class LoginScreen extends StatelessWidget {

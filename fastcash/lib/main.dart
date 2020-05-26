@@ -18,12 +18,18 @@ class _MyApp extends State<MyApp> {
   final storage = new FlutterSecureStorage();
 
   Future<bool> skipIntro() async {
-    return await storage.read(key: 'intro') != null;
+    print("Skipping intro...");
+    var data = await storage.readAll();
+    print("User data: " + data.toString());
+    var intro = await storage.read(key: 'intro');
+    return intro != null;
   }
 
   Future<bool> loggedIn() async {
+    print("Logging in...");
     var email = await storage.read(key: 'email');
     var password = await storage.read(key: 'password');
+    print("Email: " + email + " Password: " + password);
     return ((email != null) && (password != null));
   }
 

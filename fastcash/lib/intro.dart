@@ -22,6 +22,7 @@ class IntroScreenState extends State<IntroScreen> {
   final storage = new FlutterSecureStorage();
 
   introViewed() async {
+    print("Intro viewed...");
     await storage.write(key: "intro", value: "viewed");
   }
 
@@ -208,8 +209,8 @@ class IntroScreenState extends State<IntroScreen> {
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(18.0),
                     ),
-                    onPressed: () {
-                      introViewed();
+                    onPressed: () async {
+                      await introViewed();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -234,7 +235,8 @@ class IntroScreenState extends State<IntroScreen> {
                           'Login',
                           style: TextStyle(fontSize: 20),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          await introViewed();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
